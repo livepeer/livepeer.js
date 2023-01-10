@@ -9,12 +9,12 @@ const mp4Url =
 //   id: string;
 // };
 
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [],
+//     fallback: 'blocking',
+//   };
+// }
 
 // export const getStaticProps = async (props: GetStaticPropsContext<Path>) => {
 //   const dehydratedState = await prefetchPlayer(
