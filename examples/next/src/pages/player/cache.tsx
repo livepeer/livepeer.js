@@ -1,16 +1,14 @@
-import { Player, prefetchPlayer } from '@livepeer/react';
-import type { GetStaticPropsContext, NextPage } from 'next';
+import { Player } from '@livepeer/react';
+import type { NextPage } from 'next';
 import Head from 'next/head';
 // import { useRouter } from 'next/router';
-
-import { provider } from '../../utils';
 
 const mp4Url =
   'https://file-examples.com/storage/fea8fc38fd63bc5c39cf20b/2017/04/file_example_MP4_1920_18MG.mp4';
 
-type Path = {
-  id: string;
-};
+// type Path = {
+//   id: string;
+// };
 
 export async function getStaticPaths() {
   return {
@@ -19,19 +17,19 @@ export async function getStaticPaths() {
   };
 }
 
-export const getStaticProps = async (props: GetStaticPropsContext<Path>) => {
-  const dehydratedState = await prefetchPlayer(
-    { playbackId: props.params?.id },
-    { provider },
-  );
+// export const getStaticProps = async (props: GetStaticPropsContext<Path>) => {
+//   const dehydratedState = await prefetchPlayer(
+//     { playbackId: props.params?.id },
+//     { provider },
+//   );
 
-  return {
-    props: {
-      dehydratedState,
-    },
-    revalidate: 600,
-  };
-};
+//   return {
+//     props: {
+//       dehydratedState,
+//     },
+//     revalidate: 600,
+//   };
+// };
 
 const PlayerPage: NextPage = () => {
   // const { query } = useRouter();
