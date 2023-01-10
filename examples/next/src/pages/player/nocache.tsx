@@ -3,7 +3,7 @@ import type { NextPage } from 'next';
 // import { useRouter } from 'next/router';
 
 const mp4Url =
-  'https://file-examples.com/storage/fea8fc38fd63bc5c39cf20b/2017/04/file_example_MP4_1920_18MG.mp4';
+  'https://asset-cdn.lp-playback.monster/hls/89e8h99q7lu6u7qv/720p.mp4';
 
 // type Path = {
 //   id: string;
