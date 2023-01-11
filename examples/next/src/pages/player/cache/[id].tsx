@@ -56,10 +56,10 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
       style={{
         position: 'absolute',
         top: 0,
-        bottom: 0,
         left: 0,
         right: 0,
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor: '#000',
@@ -68,10 +68,11 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
       <Head>
         <link rel="preload" as="video" href={url} />
       </Head>
-      <p>Cache</p>
+      <p style={{ color: 'white' }}>Cache</p>
+      <div style={{ height: '110vh' }} />
       <video
         ref={ref}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%' }}
         title="Cache"
         src={url}
         muted

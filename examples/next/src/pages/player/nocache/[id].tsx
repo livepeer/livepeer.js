@@ -55,22 +55,24 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
       style={{
         position: 'absolute',
         top: 0,
-        bottom: 0,
         left: 0,
         right: 0,
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignContent: 'center',
         backgroundColor: '#000',
       }}
     >
-      <p>No Cache</p>
+      <p style={{ color: 'white' }}>No Cache</p>
+      <div style={{ height: '110vh' }} />
       <video
         ref={ref}
-        style={{ width: '100%', height: '100%' }}
+        style={{ width: '100%' }}
         title="No Cache"
         src={url}
         muted
+        preload="auto"
         controls
       />
     </div>
