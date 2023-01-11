@@ -71,6 +71,7 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         title="No Cache"
         src={url}
         muted
+        controls
       />
     </div>
   );

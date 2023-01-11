@@ -76,6 +76,7 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         src={url}
         muted
         preload="auto"
+        controls
       />
     </div>
   );
