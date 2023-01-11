@@ -75,7 +75,7 @@ export const VideoPlayer = React.forwardRef<
         playsInline
         muted={muted}
         poster={typeof poster === 'string' ? poster : undefined}
-        preload={priority ? 'auto' : 'metadata'}
+        preload={priority ? 'auto' : 'none'}
       >
         {typeof document !== 'undefined' &&
           createPortal(
