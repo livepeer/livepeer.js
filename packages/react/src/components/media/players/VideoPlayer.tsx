@@ -77,20 +77,19 @@ export const VideoPlayer = React.forwardRef<
         poster={typeof poster === 'string' ? poster : undefined}
         preload={priority ? 'auto' : 'none'}
       >
-        {typeof document !== 'undefined' &&
-          createPortal(
-            <>
-              {filteredSources?.[0]?.mime && (
-                <link
-                  rel="preload"
-                  as="video"
-                  href={filteredSources[0].src}
-                  type={filteredSources[0].mime}
-                />
-              )}
-            </>,
-            document.head,
-          )}
+        {createPortal(
+          <>
+            {filteredSources?.[0]?.mime && (
+              <link
+                rel="preload"
+                as="video"
+                href={filteredSources[0].src}
+                type={filteredSources[0].mime}
+              />
+            )}
+          </>,
+          document.head,
+        )}
         {filteredSources?.map((source) => (
           <source key={source.src} src={source.src} type={source.mime!} />
         ))}
