@@ -1,8 +1,9 @@
 import { VideoPlayerProps } from '@livepeer/core-react/components';
-import { MediaControllerState, VideoSrc } from 'livepeer';
+import { MediaControllerState } from 'livepeer';
 import { canPlayMediaNatively } from 'livepeer/media/browser';
 import { styling } from 'livepeer/media/browser/styling';
 import * as React from 'react';
+import { createPortal } from 'react-dom';
 
 import { useMediaController } from '../../../context';
 import { PosterSource } from '../Player';
@@ -18,16 +19,13 @@ export type { VideoPlayerProps };
 export const VideoPlayer = React.forwardRef<
   HTMLVideoElement,
   VideoPlayerProps<HTMLVideoElement, PosterSource>
->(({ src, autoPlay, title, loop, muted, poster, objectFit }, ref) => {
+>(({ src, autoPlay, title, loop, muted, poster, objectFit, priority }, ref) => {
   const { fullscreen } = useMediaController(mediaControllerSelector);
 
-  const [filteredSources, setFilteredSources] = React.useState<
-    VideoSrc[] | undefined
-  >();
-
-  React.useEffect(() => {
-    setFilteredSources(src?.filter((s) => s?.mime && canPlayMediaNatively(s)));
-  }, [src]);
+  const filteredSources = React.useMemo(
+    () => src?.filter((s) => s?.mime && canPlayMediaNatively(s)),
+    [src],
+  );
 
   return (
     <video
@@ -45,7 +43,22 @@ export const VideoPlayer = React.forwardRef<
       playsInline
       muted={muted}
       poster={typeof poster === 'string' ? poster : undefined}
+      preload={priority ? 'auto' : 'metadata'}
     >
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <>
+            {filteredSources?.[0]?.mime && (
+              <link
+                rel="preload"
+                as="video"
+                href={filteredSources[0].src}
+                type={filteredSources[0].mime}
+              />
+            )}
+          </>,
+          document.head,
+        )}
       {filteredSources?.map((source) => (
         <source key={source.src} src={source.src} type={source.mime!} />
       ))}

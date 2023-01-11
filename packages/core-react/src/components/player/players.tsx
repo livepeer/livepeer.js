@@ -10,6 +10,7 @@ export type HlsPlayerProps<TElement, TPoster> = {
   loop?: boolean;
   title?: string;
   muted?: boolean;
+  priority?: boolean;
   poster?: PlayerProps<TElement, TPoster>['poster'];
   jwt?: string;
   options?: ControlsOptions;
