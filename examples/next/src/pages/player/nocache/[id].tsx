@@ -41,7 +41,7 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         backgroundColor: '#000',
       }}
     >
-      <Player objectFit="contain" src={url} muted autoPlay />
+      <Player title="No Cache" objectFit="contain" src={url} muted autoPlay />
     </div>
   );
 };
