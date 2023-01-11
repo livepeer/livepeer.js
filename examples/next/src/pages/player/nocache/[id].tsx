@@ -10,10 +10,10 @@ type Path = {
 export async function getStaticPaths() {
   return {
     paths: [
-      { params: { id: '720p.mp4' } },
-      { params: { id: '540p.mp4' } },
-      { params: { id: '720p-fast-start.mp4' } },
-      { params: { id: '540p-fast-start.mp4' } },
+      { params: { id: '720p' } },
+      { params: { id: '540p' } },
+      { params: { id: '720p-fast-start' } },
+      { params: { id: '540p-fast-start' } },
     ],
     fallback: false,
   };
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async (props: GetStaticPropsContext<Path>) => {
   return {
-    props: { url: `${mp4Url}/${props.params?.id}` },
+    props: { url: `${mp4Url}/${props.params?.id}.mp4` },
     revalidate: 600,
   };
 };
