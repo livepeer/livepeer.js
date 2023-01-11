@@ -72,7 +72,7 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         title="No Cache"
         src={url}
         muted
-        preload="auto"
+        preload="none"
         controls
       />
     </div>
