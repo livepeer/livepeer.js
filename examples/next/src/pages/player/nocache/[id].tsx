@@ -1,5 +1,5 @@
-import { Player } from '@livepeer/react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import { useEffect, useRef } from 'react';
 
 const mp4Url = 'https://asset-cdn.lp-playback.monster/hls/89e8h99q7lu6u7qv';
 
@@ -26,7 +26,30 @@ export const getStaticProps = async (props: GetStaticPropsContext<Path>) => {
   };
 };
 
+const initial = Date.now();
+
 const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
+  const ref = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const mediaElement = ref.current;
+
+    const canplay = () => console.log(`canplay: ${Date.now() - initial}`);
+    const loadeddata = () => console.log(`loadeddata: ${Date.now() - initial}`);
+    const loadedmetadata = () =>
+      console.log(`loadedmetadata: ${Date.now() - initial}`);
+
+    mediaElement?.addEventListener('canplay', canplay);
+    mediaElement?.addEventListener('loadeddata', loadeddata);
+    mediaElement?.addEventListener('loadedmetadata', loadedmetadata);
+
+    return () => {
+      mediaElement?.removeEventListener('canplay', canplay);
+      mediaElement?.removeEventListener('loadeddata', loadeddata);
+      mediaElement?.removeEventListener('loadedmetadata', loadedmetadata);
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -41,7 +64,14 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         backgroundColor: '#000',
       }}
     >
-      <Player title="No Cache" objectFit="contain" src={url} muted autoPlay />
+      <p>No Cache</p>
+      <video
+        ref={ref}
+        style={{ width: '100%', height: '100%' }}
+        title="No Cache"
+        src={url}
+        muted
+      />
     </div>
   );
 };
