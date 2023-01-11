@@ -228,7 +228,6 @@ export class MetricsStatus<TElement> {
   }
   setFirstPlayback() {
     this.currentMetrics.firstPlayback = Date.now() - bootMs;
-    console.log(`First playback: ${this.currentMetrics.firstPlayback}`);
   }
   setPlaybackScore(playbackScore: number) {
     this.currentMetrics.playbackScore = playbackScore;

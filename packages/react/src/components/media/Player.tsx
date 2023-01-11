@@ -34,6 +34,8 @@ type PlayerProps = CorePlayerProps<HTMLMediaElement, PosterSource> & {
   controls?: ControlsOptions;
 };
 
+const initial = Date.now();
+
 export type { PlayerObjectFit, PlayerProps };
 
 export const PlayerInternal = (props: PlayerProps) => {
@@ -57,6 +59,23 @@ export const PlayerInternal = (props: PlayerProps) => {
   } = usePlayer<HTMLMediaElement, PosterSource>(props, {
     _isCurrentlyShown: isCurrentlyShown,
   });
+
+  React.useEffect(() => {
+    const canplay = () => console.log(`canplay: ${Date.now() - initial}`);
+    const loadeddata = () => console.log(`loadeddata: ${Date.now() - initial}`);
+    const loadedmetadata = () =>
+      console.log(`loadedmetadata: ${Date.now() - initial}`);
+
+    mediaElement?.addEventListener('canplay', canplay);
+    mediaElement?.addEventListener('loadeddata', loadeddata);
+    mediaElement?.addEventListener('loadedmetadata', loadedmetadata);
+
+    return () => {
+      mediaElement?.removeEventListener('canplay', canplay);
+      mediaElement?.removeEventListener('loadeddata', loadeddata);
+      mediaElement?.removeEventListener('loadedmetadata', loadedmetadata);
+    };
+  }, [mediaElement]);
 
   const _isCurrentlyShown = useIsElementShown(mediaElement);
 
