@@ -1,5 +1,6 @@
 import { Player } from '@livepeer/react';
 import type { GetStaticPropsContext, NextPage } from 'next';
+import Head from 'next/head';
 
 const mp4Url = 'https://asset-cdn.lp-playback.monster/hls/89e8h99q7lu6u7qv';
 
@@ -41,6 +42,9 @@ const PlayerPage: NextPage<{ url: string }> = ({ url }) => {
         backgroundColor: '#000',
       }}
     >
+      <Head>
+        <link rel="preload" as="video" href={url} />
+      </Head>
       <Player
         title="Cache"
         objectFit="contain"
