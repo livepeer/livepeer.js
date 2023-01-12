@@ -3,6 +3,7 @@ export {
   addMediaMetricsToInitializedStore,
   getDeviceInfo,
   isPictureInPictureSupported,
+  isAirPlaySupported,
 } from './controls';
 export type {
   ControlsOptions,

@@ -7,6 +7,7 @@ import {
 } from '@livepeer/core/media';
 import { StoreApi } from 'zustand/vanilla';
 
+import { requestAirPlay } from './airplay';
 import {
   addFullscreenEventListener,
   enterFullscreen,
@@ -406,6 +407,12 @@ const addEffectsToStore = <TElement extends HTMLMediaElement>(
           } else {
             previousPromise = exitFullscreen(element);
           }
+        }
+
+        if (
+          current._requestedAirPlayLastTime !== prev._requestedAirPlayLastTime
+        ) {
+          requestAirPlay(element);
         }
 
         if (

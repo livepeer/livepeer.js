@@ -11,6 +11,7 @@ it('should expose correct exports', () => {
       "addMediaMetricsToInitializedStore",
       "canPlayMediaNatively",
       "getDeviceInfo",
+      "isAirPlaySupported",
       "isPictureInPictureSupported",
     ]
   `);

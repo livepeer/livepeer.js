@@ -12,6 +12,7 @@ import { MediaControllerProvider } from '../../context';
 import { useIsElementShown } from '../useIsElementShown';
 
 import {
+  AirPlayButton,
   Container,
   ControlsContainer,
   FullscreenButton,
@@ -30,6 +31,10 @@ export type PosterSource = string | React.ReactNode;
 type PlayerProps = CorePlayerProps<HTMLMediaElement, PosterSource> & {
   /** Whether to show the picture in picture button (web only) */
   showPipButton?: boolean;
+
+  /** Whether to show the airplay button (Safari only) */
+  showAirplayButton?: boolean;
+
   /** Configuration for the event listeners */
   controls?: ControlsOptions;
 };
@@ -112,6 +117,7 @@ export const PlayerInternal = (props: PlayerProps) => {
               right={
                 <>
                   {props.showPipButton && <PictureInPictureButton />}
+                  {props.showAirplayButton && <AirPlayButton />}
                   <FullscreenButton />
                 </>
               }

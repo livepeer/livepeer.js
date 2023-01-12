@@ -12,6 +12,7 @@ export {
   PictureInPictureButton,
   type PictureInPictureButtonProps,
 } from './PictureInPictureButton';
+export { AirPlayButton, type AirPlayButtonProps } from './AirPlay';
 export { PlayButton, type PlayButtonProps } from './PlayButton';
 export { Poster, type PosterProps } from './Poster';
 export { Progress, type ProgressProps } from './Progress';

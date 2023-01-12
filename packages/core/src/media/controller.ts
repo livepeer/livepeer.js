@@ -70,6 +70,9 @@ export type MediaControllerState<TElement = void> = {
   /** The last time that picture in picture was changed*/
   _requestedPictureInPictureLastTime: number;
 
+  /** The last time that airplay was requested */
+  _requestedAirPlayLastTime: number;
+
   /** If the content is live media */
   live: boolean;
 
@@ -121,7 +124,7 @@ export type MediaControllerState<TElement = void> = {
   setPictureInPicture: (pictureInPicture: boolean) => void;
   requestToggleFullscreen: () => void;
   requestTogglePictureInPicture: () => void;
-
+  requestAirPlay: () => void;
   _setVolume: (volume: number) => void;
   requestVolume: (volume: number) => void;
   requestToggleMute: () => void;
@@ -199,6 +202,7 @@ export const createControllerStore = <TElement>({
         _requestedRangeToSeekTo: 0,
         _requestedFullscreenLastTime: Date.now(),
         _requestedPictureInPictureLastTime: Date.now(),
+        _requestedAirPlayLastTime: Date.now(),
         _requestedPlayPauseLastTime: Date.now(),
 
         setHidden: (hidden: boolean) =>
@@ -282,6 +286,10 @@ export const createControllerStore = <TElement>({
         requestTogglePictureInPicture: () =>
           set(() => ({
             _requestedPictureInPictureLastTime: Date.now(),
+          })),
+        requestAirPlay: () =>
+          set(() => ({
+            _requestedAirPlayLastTime: Date.now(),
           })),
 
         setLive: (live: boolean) => set(() => ({ live })),
